@@ -30,7 +30,7 @@ function downloadImageByURL(url, filePath) {
          throw err;
        })
        .on('response', function (response) {
-          console.log('Downloading image...');
+          //console.log('Downloading image...');
          console.log('Response Status Code: ', response.statusMessage, response.headers['content-type']);
        })
        .pipe(fs.createWriteStream(filePath))
@@ -41,13 +41,9 @@ function downloadImageByURL(url, filePath) {
 
 //Test: downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "avatars/kvirani.jpg")
 
-
-
-
-
 getRepoContributors("jquery", "jquery", function(err, result) {
   for(var i = 0; i < result.length; i++){
-      console.log(result[i].avatar_url);
+      downloadImageByURL(result[i].avatar_url, "avatars/" + result[i].login);
 
     }
 
@@ -66,7 +62,3 @@ getRepoContributors("jquery", "jquery", function(err, result) {
 // getRepoContributors function to parse the JSON string into an object and pass this object (an array of contributor objects) to the cb function.
 
 // You will also need to modify the callback function to iterate over the results and (for now) console.log the value for each avatar_url in the collection:
-
-
-
-
